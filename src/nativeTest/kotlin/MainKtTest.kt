@@ -4,73 +4,83 @@ import kotlin.test.assertEquals
 
 
 @Test
+fun `parse input as iso`() {
+    assertEquals(LocalDate(2020, 9, 12), parseInput("2020-09-12"))
+}
+
+@Test
+fun `parse input as numeric`() {
+    assertEquals(LocalDate(2020, 9, 12), parseInput("2020-09-12"))
+}
+
+@Test
 fun `process a saturday`() {
-    assertEquals("1\t0", process(LocalDate(2020, 9, 12)))
+    assertEquals("2020-09-12\t1\t0", process(LocalDate(2020, 9, 12)))
 }
 
 @Test
 fun `process a sunday`() {
-    assertEquals("1\t0", process(LocalDate(2020, 9, 13)))
+    assertEquals("2020-09-13\t1\t0", process(LocalDate(2020, 9, 13)))
 }
 
 @Test
 fun `process a monday`() {
-    assertEquals("0\t0", process(LocalDate(2020, 9, 14)))
+    assertEquals("2020-09-14\t0\t0", process(LocalDate(2020, 9, 14)))
 }
 
 @Test
 fun `process new year day`() {
-    assertEquals("0\t1", process(LocalDate(2020, 1, 1)))
+    assertEquals("2020-01-01\t0\t1", process(LocalDate(2020, 1, 1)))
 }
 
 @Test
 fun `process easter`() {
-    assertEquals("0\t1", process(LocalDate(2020, 4, 13)))
+    assertEquals("2020-04-13\t0\t1", process(LocalDate(2020, 4, 13)))
 }
 
 @Test
 fun `process may the 1st`() {
-    assertEquals("0\t1", process(LocalDate(2020, 5, 1)))
+    assertEquals("2020-05-01\t0\t1", process(LocalDate(2020, 5, 1)))
 }
 
 @Test
 fun `process may the 8th`() {
-    assertEquals("0\t1", process(LocalDate(2020, 5, 8)))
+    assertEquals("2020-05-08\t0\t1", process(LocalDate(2020, 5, 8)))
 }
 
 @Test
 fun `process ascension day`() {
-    assertEquals("0\t1", process(LocalDate(2020, 5, 21)))
+    assertEquals("2020-05-21\t0\t1", process(LocalDate(2020, 5, 21)))
 }
 
 @Test
 fun `process pentecost day`() {
-    assertEquals("0\t1", process(LocalDate(2020, 6, 1)))
+    assertEquals("2020-06-01\t0\t1", process(LocalDate(2020, 6, 1)))
 }
 
 @Test
 fun `process july the 14th`() {
-    assertEquals("0\t1", process(LocalDate(2020, 7, 14)))
+    assertEquals("2020-07-14\t0\t1", process(LocalDate(2020, 7, 14)))
 }
 
 @Test
 fun `process assumption day`() {
-    assertEquals("1\t1", process(LocalDate(2020, 8, 15)))
+    assertEquals("2020-08-15\t1\t1", process(LocalDate(2020, 8, 15)))
 }
 
 @Test
 fun `process toussaint`() {
-    assertEquals("1\t1", process(LocalDate(2020, 11, 1)))
+    assertEquals("2020-11-01\t1\t1", process(LocalDate(2020, 11, 1)))
 }
 
 @Test
 fun `process november the 11th`() {
-    assertEquals("0\t1", process(LocalDate(2020, 11, 11)))
+    assertEquals("2020-11-11\t0\t1", process(LocalDate(2020, 11, 11)))
 }
 
 @Test
 fun `process Xmas day`() {
-    assertEquals("0\t1", process(LocalDate(2020, 12, 25)))
+    assertEquals("2020-12-25\t0\t1", process(LocalDate(2020, 12, 25)))
 }
 
 @Test

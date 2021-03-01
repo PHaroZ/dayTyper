@@ -6,18 +6,31 @@ import platform.posix.fprintf
 import kotlin.system.exitProcess
 
 fun main() = readLine()
-    .let { it ?: exit(1, "an iso-date should be passed as stdin") }
-    .let {
-        try {
-            LocalDate.parse(it)
-        } catch (e: IllegalArgumentException) {
-            exit(2, "illegal date format ${e.message}")
-        }
-    }
-    .let { process(it) }
-    .let { println(it) }
+    .let(::parseInput)
+    .let(::process)
+    .let(::println)
 
-fun process(date: LocalDate) = "${isWeekEnd(date).toInt()}\t${isPublicHolidays(date).toInt()}"
+fun parseInput(s: String?) = s
+    .let { it ?: exit(1, "an date should be passed as stdin") }
+    .let {
+        Regex("^(\\d{4})(\\d{2})(\\d{2})$")
+            .matchEntire(it)
+            ?.let { match ->
+                LocalDate(
+                    match.groups[1]!!.value.toInt(10),
+                    match.groups[2]!!.value.toInt(10),
+                    match.groups[3]!!.value.toInt(10)
+                )
+            }
+            ?: try {
+                LocalDate.parse(it)
+            } catch (e: IllegalArgumentException) {
+                null
+            }
+            ?: exit(2, "illegal date format, should be formatted as YYYYMMDD or YYYY-MM-DD")
+    }
+
+fun process(date: LocalDate) = "${date}\t${isWeekEnd(date).toInt()}\t${isPublicHolidays(date).toInt()}"
 
 fun Boolean.toInt() = if (this) 1 else 0
 
