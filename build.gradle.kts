@@ -1,8 +1,8 @@
 plugins {
-	kotlin("multiplatform") version "1.4.10"
+	kotlin("multiplatform") version "1.4.30"
 }
 group = "net.pharoz"
-version = "1.0-SNAPSHOT"
+version = "1.0"
 
 repositories {
 	mavenCentral()
